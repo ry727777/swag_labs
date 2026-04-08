@@ -8,9 +8,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.*;
+import io.qameta.allure.testng.AllureTestNg;
 
 import utils.ConfigReader;
 
+@Listeners({AllureTestNg.class})
 public class BaseTest {
 
     protected WebDriver driver;
