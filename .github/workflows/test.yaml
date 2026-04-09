@@ -1,0 +1,37 @@
+name: Selenium Tests with Allure
+
+on:
+  push:
+    branches: [ "master" ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Setup Java
+      uses: actions/setup-java@v3
+      with:
+        distribution: 'temurin'
+        java-version: '17'
+
+    - name: Install Chrome
+      run: sudo apt-get update && sudo apt-get install -y google-chrome-stable
+
+    - name: Run Tests
+      run: mvn clean test
+
+    - name: Install Allure CLI
+      run: npm install -g allure-commandline --save-dev
+
+    - name: Generate Allure Report
+      run: allure generate target/allure-results --clean -o target/allure-report
+
+    - name: Upload Allure Report
+      uses: actions/upload-artifact@v3
+      with:
+        name: allure-report
+        path: target/allure-report
