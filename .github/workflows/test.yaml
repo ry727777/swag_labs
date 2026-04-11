@@ -22,7 +22,7 @@ jobs:
       run: sudo apt-get update && sudo apt-get install -y google-chrome-stable
 
     - name: Run Tests
-      run: mvn clean test
+      run: mvn clean test -Dheadless=true
 
     - name: Install Allure CLI
       run: npm install -g allure-commandline --save-dev
